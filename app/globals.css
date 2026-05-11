@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 60 9% 98%;        /* paper #fafaf9 */
+    --foreground: 222 47% 11%;      /* ink #0f172a */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 222 47% 11%;
+    --primary-foreground: 60 9% 98%;
+
+    --secondary: 222 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 222 14% 95%;
+    --muted-foreground: 222 16% 40%;
+
+    --accent: 174 84% 32%;          /* teal #0d9488 */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 16% 88%;
+    --input: 222 16% 88%;
+    --ring: 174 84% 32%;
+
+    --radius: 0.6rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  }
+
+  ::selection {
+    background-color: rgba(13, 148, 136, 0.18);
+    color: #0f172a;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+  }
+
+  /* subtle grid pattern background utility */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  .bg-noise {
+    background-image: radial-gradient(
+        circle at 1px 1px,
+        rgba(15, 23, 42, 0.04) 1px,
+        transparent 0
+      );
+    background-size: 16px 16px;
+  }
+}
+
+@layer utilities {
+  .container-prose {
+    @apply mx-auto max-w-3xl;
+  }
+
+  /* Smooth text rendering on hero typography */
+  .hero-heading {
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+  }
+}

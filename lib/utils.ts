@@ -1,0 +1,21 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export function formatDate(iso: string) {
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+export function formatAuthors(authors: string[], highlight = "Yusufoğlu") {
+  return authors
+    .map((a) => (a.includes(highlight) ? `__${a}__` : a))
+    .join(", ");
+}
