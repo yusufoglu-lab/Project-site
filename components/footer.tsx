@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   GraduationCap,
   Mail,
@@ -7,36 +6,42 @@ import {
   Twitter,
   BookOpen,
 } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { profile } from "@/data/profile";
 
-const footerNav = [
-  {
-    title: "Research",
-    links: [
-      { href: "/research", label: "Projects" },
-      { href: "/publications", label: "Publications" },
-      { href: "/team", label: "Team" },
-    ],
-  },
-  {
-    title: "About",
-    links: [
-      { href: "/about", label: "About" },
-      { href: "/cv", label: "CV" },
-      { href: "/teaching", label: "Teaching" },
-    ],
-  },
-  {
-    title: "Connect",
-    links: [
-      { href: "/news", label: "News" },
-      { href: "/contact", label: "Contact" },
-      { href: `mailto:${profile.email}`, label: "Email" },
-    ],
-  },
-];
+export async function Footer() {
+  const t = await getTranslations("footer");
+  const tNav = await getTranslations("nav");
+  const tCommon = await getTranslations("common");
 
-export function Footer() {
+  const footerNav = [
+    {
+      title: t("research"),
+      links: [
+        { href: "/research" as const, label: t("projects") },
+        { href: "/publications" as const, label: tNav("publications") },
+        { href: "/team" as const, label: tNav("team") },
+      ],
+    },
+    {
+      title: t("about"),
+      links: [
+        { href: "/about" as const, label: tNav("about") },
+        { href: "/cv" as const, label: tNav("cv") },
+        { href: "/teaching" as const, label: tNav("teaching") },
+      ],
+    },
+    {
+      title: t("connect"),
+      links: [
+        { href: "/news" as const, label: tNav("news") },
+        { href: "/contact" as const, label: tNav("contact") },
+        { href: `mailto:${profile.email}`, label: t("email"), external: false },
+      ],
+    },
+  ];
+
   return (
     <footer className="border-t border-ink/10 bg-paper">
       <div className="container mx-auto py-16">
@@ -59,22 +64,22 @@ export function Footer() {
               {profile.shortBio}
             </p>
             <ul className="mt-6 flex flex-wrap items-center gap-2">
-              <SocialLink href={profile.scholar} label="Google Scholar">
+              <SocialLink href={profile.scholar} label={tCommon("google_scholar")}>
                 <GraduationCap className="h-4 w-4" />
               </SocialLink>
-              <SocialLink href={profile.orcid} label="ORCID">
+              <SocialLink href={profile.orcid} label={tCommon("orcid")}>
                 <BookOpen className="h-4 w-4" />
               </SocialLink>
               <SocialLink href={profile.linkedin} label="LinkedIn">
                 <Linkedin className="h-4 w-4" />
               </SocialLink>
-              <SocialLink href={profile.twitter} label="Twitter / X">
+              <SocialLink href={profile.twitter} label="İTÜ Research">
                 <Twitter className="h-4 w-4" />
               </SocialLink>
-              <SocialLink href={profile.github} label="GitHub">
+              <SocialLink href={profile.github} label="İTÜ Akademi">
                 <Github className="h-4 w-4" />
               </SocialLink>
-              <SocialLink href={`mailto:${profile.email}`} label="Email">
+              <SocialLink href={`mailto:${profile.email}`} label={t("email")}>
                 <Mail className="h-4 w-4" />
               </SocialLink>
             </ul>
@@ -87,13 +92,22 @@ export function Footer() {
               </p>
               <ul className="mt-4 space-y-2">
                 {col.links.map((l) => (
-                  <li key={l.href}>
-                    <Link
-                      href={l.href}
-                      className="text-sm text-ink/75 hover:text-teal-dark"
-                    >
-                      {l.label}
-                    </Link>
+                  <li key={l.href + l.label}>
+                    {l.href.startsWith("mailto") ? (
+                      <a
+                        href={l.href}
+                        className="text-sm text-ink/75 hover:text-teal-dark"
+                      >
+                        {l.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={l.href}
+                        className="text-sm text-ink/75 hover:text-teal-dark"
+                      >
+                        {l.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -103,11 +117,9 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-ink/8 pt-6 text-xs text-ink/55 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {profile.name}. All rights reserved.
+            © {new Date().getFullYear()} {profile.name}. {t("rights")}
           </p>
-          <p>
-            {profile.department} · {profile.institution}
-          </p>
+          <p>{t("built_with")}</p>
         </div>
       </div>
     </footer>
@@ -125,7 +137,7 @@ function SocialLink({
 }) {
   return (
     <li>
-      <Link
+      <a
         href={href}
         target={href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
@@ -133,7 +145,7 @@ function SocialLink({
         className="grid h-9 w-9 place-items-center rounded-full border border-ink/10 text-ink/70 transition-colors hover:border-teal/40 hover:bg-teal/5 hover:text-teal-dark"
       >
         {children}
-      </Link>
+      </a>
     </li>
   );
 }

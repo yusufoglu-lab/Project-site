@@ -98,7 +98,34 @@ All copy lives in `/data/*.ts`. Each file is fully typed, so your editor will au
 
 ### Images
 
-Drop your portrait into `public/images/profile.jpg` and any team photos into `public/images/team/<slug>.jpg`. The placeholder gradient cards will be replaced automatically.
+Place photos in the repo as follows (JPG recommended; a `scripts/prepare-images.mjs` helper converts WebP/PNG to JPG):
+
+| File | Person |
+|------|--------|
+| `public/images/busra-yusufoglu.jpg` | Dr. Büşra Yusufoğlu (also used on home & team PI) |
+| `public/images/team/yanki-basaran.jpg` | Yankı Başaran |
+| `public/images/team/yigit-toraman.jpg` | Yiğit Toraman |
+| `public/images/team/sukran-kaya.jpg` | Şükran Kaya |
+| `public/images/team/gulbahar-karakas.jpg` | Gülbahar Karakaş |
+| `public/images/team/batuhan-karakus.jpg` | Batuhan Karakuş |
+| `public/images/team/emir-sirmaoglu.jpg` | Emir Sırmaoğlu |
+| `public/images/team/semih-eroglu.jpg` | Semih Eroğlu |
+| `public/images/team/muhammet-enes-pamukcu.jpg` | Muhammet Enes Pamukçu |
+
+Recommended size: **400×400 px** square. Missing photos show initials automatically (no broken images).
+
+```bash
+node scripts/prepare-images.mjs
+```
+
+### Languages
+
+The site supports **Turkish (default)**, **English**, and **German** via [next-intl](https://next-intl.dev):
+
+- URLs: `/` or `/tr/...`, `/en/...`, `/de/...`
+- Language switcher in the navbar (TR / EN / DE)
+- Preference saved in `localStorage` and `NEXT_LOCALE` cookie
+- UI strings: `messages/tr.json`, `messages/en.json`, `messages/de.json`
 
 ### PDF CV
 

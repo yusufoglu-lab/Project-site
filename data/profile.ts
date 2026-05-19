@@ -9,9 +9,11 @@ export const profile = {
   email: "yusufoglu@itu.edu.tr",
   emailAlt: "drbusrayusufoglu@gmail.com",
   phone: "+90 (212) 285 30 00",
-  office: "İTÜ Ayazağa Kampüsü, 34469 Maslak, İstanbul, Türkiye",
-  address: "İTÜ Ayazağa Kampüsü, 34469 Maslak, İstanbul, Türkiye",
-  photo: "/images/busra-yusufoglu.webp",
+  office:
+    "İTÜ Ayazağa Kampüsü, Kimya Bölümü, 34469 Maslak, İstanbul, Türkiye",
+  address:
+    "İTÜ Ayazağa Kampüsü, Kimya Bölümü, 34469 Maslak, İstanbul, Türkiye",
+  photo: "/images/busra-yusufoglu.jpg",
   shortBio:
     "İTÜ Kimya Bölümü'nde Doktor Öğretim Üyesi; araştırmaları ileri glikasyon son ürünleri (AGEs), fonksiyonel gıdalar, gıda ve analitik kimya ile yapay zeka destekli beslenme bilimi üzerine odaklanmaktadır.",
   bio: `Dr. Büşra Yusufoğlu, İstanbul Teknik Üniversitesi Kimya Bölümü'nde Doktor Öğretim Üyesi olarak görev yapmaktadır. Araştırmaları; ileri glikasyon son ürünleri (AGEs), fonksiyonel gıdalar, gıda kimyası, analitik kimya ve yapay zeka destekli beslenme bilimi üzerine yoğunlaşmaktadır. Yurt içinde ve yurt dışında çok sayıda araştırma deneyimi bulunan Dr. Yusufoğlu, University of Connecticut (2021) ve Leibniz University Hannover (2024) gibi prestijli kurumlarda misafir araştırmacı olarak çalışmıştır.`,

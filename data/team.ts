@@ -30,7 +30,7 @@ export const teamMembersData: TeamMemberRecord[] = [
     role: "Principal Investigator",
     roletr: "Araştırma Grubu Lideri",
     team: "pi",
-    photo: "/images/busra-yusufoglu.webp",
+    photo: "/images/busra-yusufoglu.jpg",
     topic:
       "Gıda Kimyası, AGEs, Yapay Zeka Destekli Beslenme, Analitik Kimya",
     isPI: true,
@@ -42,7 +42,7 @@ export const teamMembersData: TeamMemberRecord[] = [
     role: "Lab & Product Supply Team",
     roletr: "Lab ve Ürün Tedarik Ekibi",
     team: "lab",
-    photo: "/images/team/yanki-basaran.png",
+    photo: "/images/team/yanki-basaran.jpg",
     isPI: false,
     isAlumni: false,
   },
@@ -52,7 +52,7 @@ export const teamMembersData: TeamMemberRecord[] = [
     role: "Lab & Product Supply Team",
     roletr: "Lab ve Ürün Tedarik Ekibi",
     team: "lab",
-    photo: "/images/team/yigit-toraman.png",
+    photo: "/images/team/yigit-toraman.jpg",
     isPI: false,
     isAlumni: false,
   },
@@ -62,7 +62,7 @@ export const teamMembersData: TeamMemberRecord[] = [
     role: "Lab & Product Supply Team",
     roletr: "Lab ve Ürün Tedarik Ekibi",
     team: "lab",
-    photo: "/images/team/sukran-kaya.png",
+    photo: "/images/team/sukran-kaya.jpg",
     isPI: false,
     isAlumni: false,
   },
@@ -72,7 +72,7 @@ export const teamMembersData: TeamMemberRecord[] = [
     role: "AI Team",
     roletr: "AI Ekibi",
     team: "ai",
-    photo: "/images/team/gulbahar-karakas.png",
+    photo: "/images/team/gulbahar-karakas.jpg",
     isPI: false,
     isAlumni: false,
   },
@@ -82,7 +82,7 @@ export const teamMembersData: TeamMemberRecord[] = [
     role: "AI Team",
     roletr: "AI Ekibi",
     team: "ai",
-    photo: "/images/team/batuhan-karakus.png",
+    photo: "/images/team/batuhan-karakus.jpg",
     isPI: false,
     isAlumni: false,
   },
@@ -92,7 +92,7 @@ export const teamMembersData: TeamMemberRecord[] = [
     role: "AI Team",
     roletr: "AI Ekibi",
     team: "ai",
-    photo: "/images/team/emir-sirmaoglu.png",
+    photo: "/images/team/emir-sirmaoglu.jpg",
     isPI: false,
     isAlumni: false,
   },
@@ -102,7 +102,7 @@ export const teamMembersData: TeamMemberRecord[] = [
     role: "AI Team",
     roletr: "AI Ekibi",
     team: "ai",
-    photo: "/images/team/semih-eroglu.png",
+    photo: "/images/team/semih-eroglu.jpg",
     isPI: false,
     isAlumni: false,
   },
@@ -112,7 +112,7 @@ export const teamMembersData: TeamMemberRecord[] = [
     role: "AI Team",
     roletr: "AI Ekibi",
     team: "ai",
-    photo: "/images/team/muhammet-enes-pamukcu.png",
+    photo: "/images/team/muhammet-enes-pamukcu.jpg",
     isPI: false,
     isAlumni: false,
   },
@@ -135,12 +135,12 @@ export interface TeamMember {
   scholar?: string;
 }
 
-function toLegacyMember(record: TeamMemberRecord): TeamMember {
+export function toLegacyMember(record: TeamMemberRecord): TeamMember {
   const pageRole: MemberRole =
     record.team === "lab"
       ? "Undergraduate Researcher"
       : record.team === "ai"
-        ? "PhD Student"
+        ? "MS Student"
         : (record.role as MemberRole);
 
   return {

@@ -1,22 +1,30 @@
-import Link from "next/link";
+"use client";
+
+import { Link } from "@/i18n/navigation";
 import { ExternalLink, FileText, Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import type { Publication } from "@/data/publications";
+import { translatePublicationType } from "@/lib/i18n-labels";
 
 interface PublicationCardProps {
   pub: Publication;
 }
 
 export function PublicationCard({ pub }: PublicationCardProps) {
+  const t = useTranslations("publications");
+
   return (
     <article className="group relative border-l-2 border-ink/10 py-5 pl-6 transition-colors hover:border-teal">
       <div className="flex flex-wrap items-center gap-2">
-        <Badge variant="teal">{pub.type}</Badge>
+        <Badge variant="teal">
+          {translatePublicationType(pub.type, (key) => t(key))}
+        </Badge>
         <span className="text-xs text-ink/55">{pub.year}</span>
         {pub.highlight && (
           <span className="inline-flex items-center gap-1 text-xs text-amber-700">
             <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-500" />
-            Highlighted
+            {t("highlighted")}
           </span>
         )}
       </div>
@@ -46,7 +54,7 @@ export function PublicationCard({ pub }: PublicationCardProps) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-teal-dark hover:underline"
           >
-            DOI <ExternalLink className="h-3 w-3" />
+            {t("doi")} <ExternalLink className="h-3 w-3" />
           </Link>
         )}
         {pub.pdf && (
@@ -57,15 +65,15 @@ export function PublicationCard({ pub }: PublicationCardProps) {
             className="inline-flex items-center gap-1.5 text-ink/70 hover:text-ink"
           >
             <FileText className="h-3.5 w-3.5" />
-            PDF
+            {t("pdf")}
           </Link>
         )}
-        {pub.topics.map((t) => (
+        {pub.topics.map((topic) => (
           <span
-            key={t}
+            key={topic}
             className="rounded-full bg-ink/5 px-2.5 py-0.5 text-[11px] text-ink/65"
           >
-            {t}
+            {topic}
           </span>
         ))}
       </div>

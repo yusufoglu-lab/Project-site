@@ -1,7 +1,11 @@
-import Link from "next/link";
+"use client";
+
+import { Link } from "@/i18n/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "next-intl";
 import { formatDate } from "@/lib/utils";
+import { translateNewsCategory } from "@/lib/i18n-labels";
 import type { NewsItem } from "@/data/news";
 
 interface NewsCardProps {
@@ -22,6 +26,9 @@ const categoryVariant: Record<
 };
 
 export function NewsCard({ item, compact = false }: NewsCardProps) {
+  const t = useTranslations("news");
+  const tCommon = useTranslations("common");
+
   return (
     <Link
       href={`/news/${item.slug}`}
@@ -37,7 +44,7 @@ export function NewsCard({ item, compact = false }: NewsCardProps) {
           </time>
           <div className="mt-2">
             <Badge variant={categoryVariant[item.category]}>
-              {item.category}
+              {translateNewsCategory(item.category, (key) => t(key))}
             </Badge>
           </div>
         </div>
@@ -51,7 +58,7 @@ export function NewsCard({ item, compact = false }: NewsCardProps) {
             </p>
           )}
           <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-teal-dark">
-            Read more
+            {tCommon("read_more")}
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </span>
         </div>
