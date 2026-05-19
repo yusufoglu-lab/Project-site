@@ -1,59 +1,70 @@
 export const profile = {
   name: "Dr. Büşra Yusufoğlu",
   shortName: "Büşra Yusufoğlu",
-  title: "Assistant Professor of Food Engineering",
-  institution: "Istanbul Medipol University",
-  department: "Department of Nutrition and Dietetics",
-  faculty: "Faculty of Health Sciences",
-  email: "busra.yusufoglu@example.edu.tr",
-  phone: "+90 (212) 555 01 24",
-  office: "Faculty of Health Sciences, Building B, Office 312",
-  address: "Kavacık Mah. Ekinciler Cad. No:19, 34810 Beykoz, İstanbul, Türkiye",
-  photo: "/images/profile.jpg",
+  title: "Doktor Öğretim Üyesi",
+  titleEn: "Assistant Professor",
+  department: "Kimya Bölümü",
+  faculty: "Fen-Edebiyat Fakültesi",
+  institution: "İstanbul Teknik Üniversitesi (İTÜ)",
+  email: "yusufoglu@itu.edu.tr",
+  emailAlt: "drbusrayusufoglu@gmail.com",
+  phone: "+90 (212) 285 30 00",
+  office: "İTÜ Ayazağa Kampüsü, 34469 Maslak, İstanbul, Türkiye",
+  address: "İTÜ Ayazağa Kampüsü, 34469 Maslak, İstanbul, Türkiye",
+  photo: "/images/busra-yusufoglu.webp",
   shortBio:
-    "Food scientist studying how plant-based bioactive compounds shape human health — from bench-scale chemistry to dietary patterns.",
-  bio: `Dr. Büşra Yusufoğlu is an Assistant Professor in the Department of Nutrition and Dietetics at Istanbul Medipol University, where she leads the Functional Foods & Nutritional Biochemistry research group. Her work sits at the intersection of food chemistry, bioavailability, and public health nutrition, with a particular focus on polyphenols, dietary fibers, and the gut–metabolic axis.
-
-She received her Ph.D. in Food Engineering from Istanbul Technical University in 2019, after a research stay at Wageningen University & Research investigating in vitro digestion models. Her group combines analytical chemistry (LC-MS/MS, HPLC-DAD), cell-based assays, and human dietary intervention studies to evaluate how food matrix design influences the absorption, metabolism, and physiological impact of bioactive compounds.
-
-Beyond the lab, she is committed to translating food-science evidence into actionable guidance for clinicians, policymakers, and the broader public. She mentors graduate and undergraduate students, contributes to TÜBİTAK and Horizon Europe research consortia, and serves as a reviewer for journals including Food Chemistry, Food Research International, and Nutrients.`,
+    "İTÜ Kimya Bölümü'nde Doktor Öğretim Üyesi; araştırmaları ileri glikasyon son ürünleri (AGEs), fonksiyonel gıdalar, gıda ve analitik kimya ile yapay zeka destekli beslenme bilimi üzerine odaklanmaktadır.",
+  bio: `Dr. Büşra Yusufoğlu, İstanbul Teknik Üniversitesi Kimya Bölümü'nde Doktor Öğretim Üyesi olarak görev yapmaktadır. Araştırmaları; ileri glikasyon son ürünleri (AGEs), fonksiyonel gıdalar, gıda kimyası, analitik kimya ve yapay zeka destekli beslenme bilimi üzerine yoğunlaşmaktadır. Yurt içinde ve yurt dışında çok sayıda araştırma deneyimi bulunan Dr. Yusufoğlu, University of Connecticut (2021) ve Leibniz University Hannover (2024) gibi prestijli kurumlarda misafir araştırmacı olarak çalışmıştır.`,
   mission:
-    "We design, characterize, and clinically evaluate functional food strategies that improve metabolic health across the lifespan — with a particular focus on Mediterranean and Anatolian dietary traditions.",
-  scholar: "https://scholar.google.com/",
-  orcid: "https://orcid.org/0000-0000-0000-0000",
-  researchGate: "https://www.researchgate.net/",
-  linkedin: "https://www.linkedin.com/",
-  twitter: "https://twitter.com/",
-  github: "https://github.com/",
+    "Paketli ve işlenmiş gıdalardaki ileri glikasyon son ürünlerini (AGEs) kimyasal analiz ve yapay zeka algoritmalarıyla tespit ederek gıda güvenliği ve fonksiyonel gıda araştırmalarına katkı sağlıyoruz.",
+  scholar:
+    "https://scholar.google.com.tr/citations?user=Büşra",
+  orcid: "https://orcid.org/0000-0002-9158-9732",
+  researchGate: "https://www.researchgate.net/profile/Busra-Yusufoglu",
+  linkedin: "https://www.linkedin.com/in/büşra-yusufoğlu-01294831a/",
+  twitter: "https://research.itu.edu.tr/tr/persons/yusufoglu/",
+  github: "https://akademi.itu.edu.tr/yusufoglu/",
   stats: [
-    { label: "Peer-Reviewed Publications", value: 12, suffix: "+" },
-    { label: "Active Research Projects", value: 8 },
-    { label: "Students Mentored", value: 15, suffix: "+" },
-  ],
+    { label: "Yayın", value: 17, suffix: undefined },
+    { label: "Atıf", value: 113, suffix: undefined },
+    { label: "h-indeks", value: 6, suffix: undefined },
+    { label: "Aktif Proje", value: 2, suffix: undefined },
+  ] as Array<{ label: string; value: number; suffix?: string }>,
   researchAreas: [
     {
-      name: "Functional Foods & Bioactives",
+      name: "Gıda Kimyası & Analitik",
       tags: [
-        "Polyphenols",
-        "Dietary fibers",
-        "Antioxidants",
-        "Plant-based proteins",
-        "In vitro digestion",
-        "Bioavailability",
+        "İleri Glikasyon Son Ürünleri (AGEs)",
+        "Gıda Kimyası",
+        "Analitik Kimya",
+        "Biyokimya",
+        "Antioksidan Bileşikler",
+        "Enzimatik Hidroliz",
       ],
     },
     {
-      name: "Nutritional Biochemistry & Public Health",
+      name: "Fonksiyonel Gıdalar & Yapay Zeka",
       tags: [
-        "Gut microbiota",
-        "Metabolic health",
-        "Mediterranean diet",
-        "Clinical nutrition",
-        "Food matrix design",
-        "Glycemic response",
+        "Fonksiyonel Gıdalar",
+        "Gıda Teknolojileri",
+        "Yapay Zeka Destekli Beslenme",
+        "Sürdürülebilir Gıda Sistemleri",
       ],
     },
   ],
+  links: {
+    googleScholar:
+      "https://scholar.google.com.tr/citations?user=Büşra",
+    orcid: "https://orcid.org/0000-0002-9158-9732",
+    scopus:
+      "https://www.scopus.com/authid/detail.uri?authorId=57217383122",
+    webOfScience:
+      "https://www.webofscience.com/wos/author/record/ABI-3910-2020",
+    researchGate: "https://www.researchgate.net/profile/Busra-Yusufoglu",
+    linkedin: "https://www.linkedin.com/in/büşra-yusufoğlu-01294831a/",
+    ituAkademi: "https://akademi.itu.edu.tr/yusufoglu/",
+    ituResearch: "https://research.itu.edu.tr/tr/persons/yusufoglu/",
+  },
 };
 
 export type Profile = typeof profile;

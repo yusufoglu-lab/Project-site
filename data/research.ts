@@ -3,6 +3,7 @@ export type ProjectStatus = "Active" | "Ongoing" | "Completed" | "Planned";
 export interface ResearchProject {
   slug: string;
   title: string;
+  titleEn?: string;
   shortDescription: string;
   description: string;
   area: "Functional Foods" | "Nutritional Biochemistry" | "Public Health";
@@ -12,127 +13,117 @@ export interface ResearchProject {
   funding: string;
   questions: string[];
   methods: string[];
-  team: string[]; // names from team data
+  team: string[];
   relatedPublicationDois: string[];
+  topics?: string[];
   cover?: string;
 }
 
-export const researchProjects: ResearchProject[] = [
+export const projects = [
   {
-    slug: "polyphenol-bioavailability-anatolian-fruits",
+    slug: "ages-tubitak",
     title:
-      "Bioavailability of Polyphenols from Underutilized Anatolian Fruits",
-    shortDescription:
-      "Mapping the digestion, absorption, and microbial transformation of polyphenols from rosehip, cornelian cherry, and black mulberry.",
-    description: `This program characterizes the polyphenolic profile of three underutilized Anatolian fruits — rosehip (Rosa canina), cornelian cherry (Cornus mas), and black mulberry (Morus nigra) — and tracks how those compounds survive gastric and intestinal digestion. We pair INFOGEST 2.0 in vitro digestion with Caco-2/HT29-MTX co-culture absorption assays and ex vivo colonic fermentation using human fecal inocula.
+      "Paketli Gıdalarda İleri Glikasyon Ürünlerinin Tespiti: Kimyasal Analiz ve Yapay Zeka Algoritması",
+    titleEn:
+      "Detection of Advanced Glycation End Products in Packaged Foods via Chemical Analysis and AI Algorithms",
+    status: "active",
+    funder: "TÜBİTAK",
+    period: "Nisan 2025 – Nisan 2028",
+    description:
+      "Yaygın olarak tüketilen paketli gıdalardaki ileri glikasyon son ürünleri (AGEs) ve öncülleri hem kimyasal analiz yöntemleriyle hem de geliştirilen yapay zeka algoritması aracılığıyla tespit edilmekte ve kapsamlı bir veri tabanı oluşturulmaktadır.",
+    questions: [
+      "Paketli gıdalardaki AGE miktarları ne düzeydedir?",
+      "Yapay zeka algoritmaları AGE tespitinde ne kadar güvenilirdir?",
+      "Oluşturulacak veri tabanı gıda güvenliği politikalarına nasıl katkı sağlar?",
+    ],
+    topics: ["AGEs", "Yapay Zeka", "Gıda Güvenliği", "Analitik Kimya"],
+  },
+  {
+    slug: "alpha-oxoaldehydes-bap",
+    title:
+      "İşlenmiş Gıdalarda Alfa-Oksaldehit Miktarlarından Bilgisayar Algoritmalarının Oluşturulması",
+    titleEn:
+      "Development of Computer Algorithms from Alpha-Oxoaldehyde Quantities in Processed Foods",
+    status: "completed",
+    funder: "BAP (İTÜ)",
+    period: "Eylül 2023 – Ocak 2025",
+    description:
+      "İşlenmiş gıdalarda tespit edilen alfa-oksaldehit miktarları kullanılarak bilgisayar algoritmaları geliştirilmiş; gıda güvenliği değerlendirmesi için yenilikçi bir hesaplamalı yaklaşım ortaya konmuştur.",
+    questions: [
+      "Alfa-oksaldehitler işlenmiş gıdalarda ne sıklıkla tespit edilir?",
+      "Bu verilerden anlamlı bilgisayar algoritmaları üretilebilir mi?",
+    ],
+    topics: [
+      "Alfa-Oksaldehitler",
+      "Bilgisayar Algoritmaları",
+      "İşlenmiş Gıdalar",
+    ],
+  },
+] as const;
 
-The goal is to identify food matrix and processing strategies (pulping, fermentation, encapsulation in pectin–whey complexes) that maximize the bioaccessible fraction of anthocyanins and ellagitannins, and to nominate candidate compounds for a follow-on human pharmacokinetic study.`,
-    area: "Functional Foods",
-    status: "Active",
-    startYear: 2024,
-    endYear: 2027,
-    funding: "TÜBİTAK 1001 — Grant No. 124O321",
-    questions: [
-      "Which Anatolian fruit matrices retain the highest fraction of bioaccessible polyphenols after simulated digestion?",
-      "How does spray-drying with pectin–whey wall materials alter colonic metabolite profiles?",
-      "Can a single 200 g serving meaningfully shift plasma anthocyanin metabolites in a 4-hour postprandial window?",
-    ],
-    methods: [
-      "INFOGEST 2.0 static in vitro digestion",
-      "LC-MS/MS quantification of phenolic metabolites",
-      "Caco-2 / HT29-MTX co-culture transport assays",
-      "Ex vivo colonic fermentation with 16S rRNA sequencing",
-      "Randomized crossover postprandial human trial (planned, n=30)",
-    ],
-    team: ["Elif Kaya", "Mert Aslan", "Zeynep Demir", "Can Polat"],
-    relatedPublicationDois: [
-      "10.1016/j.foodchem.2024.140123",
-      "10.3390/nu16091123",
-    ],
-  },
-  {
-    slug: "mediterranean-diet-glycemic-response",
-    title:
-      "Food Matrix Engineering for Lower Glycemic Response in Anatolian Cuisine",
-    shortDescription:
-      "Reformulating traditional Turkish breads and bulgur dishes to flatten postprandial glucose without compromising sensory acceptance.",
-    description: `Working with a panel of bakers and home cooks, we systematically reformulate four staple dishes — pide, bulgur pilavı, mercimek çorbası, and yufka — substituting fractions of refined flour with high-fiber legume powders and resistant starch. Each reformulation is screened for sensory acceptability, then evaluated for postprandial glycemic and insulinemic response in healthy adults.
+function mapStatus(status: string): ProjectStatus {
+  if (status === "active") return "Active";
+  if (status === "completed") return "Completed";
+  if (status === "ongoing") return "Ongoing";
+  return "Planned";
+}
 
-The project explicitly preserves culinary identity: any acceptable reformulation must pass a triangle test against the traditional version with untrained Turkish consumers.`,
-    area: "Public Health",
-    status: "Active",
-    startYear: 2023,
-    endYear: 2026,
-    funding: "Istanbul Medipol University BAP — Grant No. 2023/14",
-    questions: [
-      "What is the maximum fraction of legume or resistant starch flour that retains sensory parity?",
-      "Do reformulated staples produce clinically meaningful reductions in iAUC glucose over 120 minutes?",
-      "How robust is the effect across normoglycemic and prediabetic participants?",
-    ],
-    methods: [
-      "Iterative culinary co-design with bakers and chefs",
-      "Trained and consumer sensory panels (CATA, triangle tests)",
-      "Continuous glucose monitoring (Freestyle Libre 3)",
-      "Mixed-effects modeling of iAUC glucose and insulin",
-    ],
-    team: ["Ayşe Yıldız", "Mert Aslan", "Selin Tekin"],
-    relatedPublicationDois: ["10.1080/09637486.2023.2287654"],
-  },
-  {
-    slug: "fermented-dairy-gut-axis",
-    title:
-      "Traditional Fermented Dairy and the Gut–Metabolic Axis",
-    shortDescription:
-      "Characterizing kefir and tarhana microbial consortia and their effects on metabolic markers in adults with overweight.",
-    description: `This project profiles the microbial and metabolomic landscape of artisanal kefir grains and tarhana from six Anatolian regions, then evaluates the most distinctive consortia in a 12-week randomized controlled trial in adults with overweight and elevated fasting glucose. We track stool 16S rRNA, fasting glucose/insulin, inflammatory markers, and short-chain fatty acid profiles.`,
-    area: "Nutritional Biochemistry",
-    status: "Ongoing",
-    startYear: 2022,
-    endYear: 2025,
-    funding: "Horizon Europe — FERMENTOMICS Consortium (WP4)",
-    questions: [
-      "Which microbial signatures distinguish regional kefir and tarhana variants?",
-      "Does a 12-week intervention shift fecal SCFA profiles and HOMA-IR?",
-      "Are responder phenotypes predictable from baseline microbiota?",
-    ],
-    methods: [
-      "Shotgun metagenomics & metabolomics of starter cultures",
-      "Randomized parallel-group RCT (n=84)",
-      "Targeted SCFA quantification by GC-MS",
-      "Machine-learning responder stratification",
-    ],
-    team: ["Elif Kaya", "Furkan Şahin", "Ayşe Yıldız"],
-    relatedPublicationDois: [
-      "10.1093/jn/nxac210",
-      "10.1016/j.jff.2023.105612",
-    ],
-  },
-  {
-    slug: "plant-protein-extrusion",
-    title:
-      "Pulse Protein Extrusion for Climate-Resilient School Nutrition",
-    shortDescription:
-      "Developing extruded chickpea–lentil snacks tailored for Turkish primary school meal programs.",
-    description: `In partnership with two municipal school meal programs, we are developing extruded snacks based on Turkish chickpea (Cicer arietinum) and red lentil (Lens culinaris) blends. The work optimizes twin-screw extrusion parameters for protein digestibility, micronutrient retention, and texture, and benchmarks the products against commercially available snacks in nutrient density and acceptability among 7–11 year-olds.`,
-    area: "Functional Foods",
-    status: "Active",
-    startYear: 2024,
-    funding: "Istanbul Metropolitan Municipality — Pilot Program",
-    questions: [
-      "Which extrusion temperature and moisture conditions maximize in vitro protein digestibility (IVPDCAAS)?",
-      "How do extruded pulses compare nutritionally to commercial wheat-based snacks?",
-      "What sensory attributes predict acceptance among primary school children?",
-    ],
-    methods: [
-      "Twin-screw extrusion (response surface methodology)",
-      "INFOGEST in vitro protein digestibility assays",
-      "Texture profile analysis & color spectroscopy",
-      "Hedonic acceptance testing with primary school cohorts",
-    ],
-    team: ["Mert Aslan", "Zeynep Demir", "Naz Öztürk"],
-    relatedPublicationDois: [],
-  },
+function parsePeriod(period: string): { startYear: number; endYear?: number } {
+  const years = period.match(/\d{4}/g);
+  if (!years || years.length === 0) return { startYear: new Date().getFullYear() };
+  const startYear = Number(years[0]);
+  const endYear =
+    period.toLowerCase().includes("günümüz") ||
+    period.toLowerCase().includes("present")
+      ? undefined
+      : years.length > 1
+        ? Number(years[years.length - 1])
+        : Number(years[0]);
+  return { startYear, endYear };
+}
+
+const activeTeam = [
+  "Gülbahar Karakaş",
+  "Batuhan Karakuş",
+  "Emir Sırmaoğlu",
+  "Semih Eroğlu",
+  "Muhammet Enes Pamukçu",
+  "Yankı Başaran",
+  "Yiğit Toraman",
+  "Şükran Kaya",
 ];
+
+export const researchProjects: ResearchProject[] = projects.map((p) => {
+  const { startYear, endYear } = parsePeriod(p.period);
+  return {
+    slug: p.slug,
+    title: p.title,
+    titleEn: p.titleEn,
+    shortDescription: p.description,
+    description: p.description,
+    area: "Functional Foods" as const,
+    status: mapStatus(p.status),
+    startYear,
+    endYear,
+    funding: `${p.funder} · ${p.period}`,
+    questions: [...p.questions],
+    methods: [
+      ...p.topics,
+      "Kimyasal analiz ve spektroskopik yöntemler",
+      "Yapay zeka ve hesaplamalı modelleme",
+    ],
+    team: p.status === "active" ? activeTeam : [],
+    relatedPublicationDois:
+      p.slug === "ages-tubitak"
+        ? [
+            "10.18466/cbayarfbe.1580554",
+            "10.1002/mnfr.70293",
+            "10.1016/j.fufo.2025.100708",
+          ]
+        : ["10.18466/cbayarfbe.1580554"],
+    topics: [...p.topics],
+  };
+});
 
 export const researchAreas = [
   "All",

@@ -1,3 +1,5 @@
+import { education as educationRaw, positions as positionsRaw } from "./education";
+
 export interface EducationEntry {
   degree: string;
   field: string;
@@ -37,154 +39,99 @@ export interface ServiceEntry {
   years: string;
 }
 
-export const education: EducationEntry[] = [
-  {
-    degree: "Ph.D.",
-    field: "Food Engineering",
-    institution: "Istanbul Technical University",
-    location: "Istanbul, Türkiye",
-    year: "2019",
-    detail:
-      "Dissertation: “Bioaccessibility of polyphenols from Anatolian fruit matrices: in vitro and cellular evaluation.” Visiting researcher at Wageningen University & Research (Netherlands), 2017–2018.",
-  },
-  {
-    degree: "M.Sc.",
-    field: "Food Engineering",
-    institution: "Istanbul Technical University",
-    location: "Istanbul, Türkiye",
-    year: "2014",
-  },
-  {
-    degree: "B.Sc.",
-    field: "Food Engineering",
-    institution: "Hacettepe University",
-    location: "Ankara, Türkiye",
-    year: "2012",
-    detail: "Graduated with high honors (top 5%).",
-  },
-];
+export const education: EducationEntry[] = educationRaw.map((e) => ({
+  degree: e.degree,
+  field: e.field,
+  institution: e.institution,
+  location: "İstanbul, Türkiye",
+  year: e.year,
+}));
 
-export const positions: PositionEntry[] = [
-  {
-    title: "Assistant Professor",
-    institution:
-      "Istanbul Medipol University — Department of Nutrition and Dietetics",
-    location: "Istanbul, Türkiye",
-    startYear: 2020,
-    detail:
-      "Founder and PI of the Functional Foods & Nutritional Biochemistry research group.",
-  },
-  {
-    title: "Postdoctoral Researcher",
-    institution: "Istanbul Technical University — Food Engineering",
-    location: "Istanbul, Türkiye",
-    startYear: 2019,
-    endYear: 2020,
-    detail:
-      "TÜBİTAK BIDEB 2218 Fellow. Worked on encapsulation of phenolic compounds for cardiometabolic applications.",
-  },
-  {
-    title: "Visiting Research Fellow",
-    institution: "Wageningen University & Research",
-    location: "Wageningen, Netherlands",
-    startYear: 2017,
-    endYear: 2018,
-    detail:
-      "Hosted in the Food Quality and Design group. Developed INFOGEST 2.0 protocols for plant matrices.",
-  },
-];
+function parsePositionYears(year: string): {
+  startYear: number;
+  endYear?: number;
+} {
+  const years = year.match(/\d{4}/g);
+  if (!years || years.length === 0) {
+    return { startYear: new Date().getFullYear() };
+  }
+  const startYear = Number(years[0]);
+  if (
+    year.toLowerCase().includes("günümüz") ||
+    year.toLowerCase().includes("present")
+  ) {
+    return { startYear };
+  }
+  const endYear =
+    years.length > 1 ? Number(years[years.length - 1]) : Number(years[0]);
+  return { startYear, endYear };
+}
+
+function locationForInstitution(institution: string): string {
+  if (institution.includes("Hannover")) return "Hannover, Almanya";
+  if (institution.includes("Connecticut")) return "Connecticut, ABD";
+  return "İstanbul, Türkiye";
+}
+
+export const positions: PositionEntry[] = positionsRaw.map((p) => {
+  const { startYear, endYear } = parsePositionYears(p.year);
+  return {
+    title: p.title,
+    institution: p.institution,
+    location: locationForInstitution(p.institution),
+    startYear,
+    endYear,
+  };
+});
 
 export const awards: AwardEntry[] = [
   {
-    title: "Best Young Investigator Award",
-    organization: "Turkish Food Congress",
+    title: "Misafir Araştırmacı",
+    organization: "Leibniz University Hannover",
     year: 2024,
+    detail: "Uluslararası araştırma ziyareti.",
   },
   {
-    title: "Outstanding Reviewer Award",
-    organization: "Food Research International (Elsevier)",
-    year: 2023,
-  },
-  {
-    title: "Early Career Travel Fellowship",
-    organization: "International Union of Food Science and Technology (IUFoST)",
-    year: 2022,
-  },
-  {
-    title: "TÜBİTAK BIDEB 2218 Postdoctoral Fellowship",
-    organization:
-      "The Scientific and Technological Research Council of Türkiye",
-    year: 2019,
-  },
-  {
-    title: "Erasmus+ Research Mobility Grant",
-    organization: "European Commission",
-    year: 2017,
+    title: "Araştırmacı",
+    organization: "University of Connecticut",
+    year: 2021,
+    detail: "Uluslararası araştırma deneyimi.",
   },
 ];
 
 export const grants: GrantEntry[] = [
   {
     title:
-      "Bioavailability of Polyphenols from Underutilized Anatolian Fruits",
-    agency: "TÜBİTAK 1001",
+      "Paketli Gıdalarda İleri Glikasyon Ürünlerinin Tespiti: Kimyasal Analiz ve Yapay Zeka Algoritması",
+    agency: "TÜBİTAK",
     role: "PI",
-    amount: "₺2,400,000",
-    years: "2024–2027",
-  },
-  {
-    title: "FERMENTOMICS — Traditional Fermented Foods and Cardiometabolic Health (WP4)",
-    agency: "Horizon Europe",
-    role: "Co-PI",
-    amount: "€480,000 (WP4 share)",
-    years: "2024–2027",
+    years: "2025–2028",
   },
   {
     title:
-      "Reformulating Turkish Staples for Improved Glycemic Response",
-    agency: "Istanbul Medipol University BAP",
+      "İşlenmiş Gıdalarda Alfa-Oksaldehit Miktarlarından Bilgisayar Algoritmalarının Oluşturulması",
+    agency: "BAP (İTÜ)",
     role: "PI",
-    amount: "₺350,000",
-    years: "2023–2026",
-  },
-  {
-    title:
-      "Pulse Protein Extrusion for Climate-Resilient School Nutrition",
-    agency: "Istanbul Metropolitan Municipality — Pilot Program",
-    role: "PI",
-    amount: "₺180,000",
-    years: "2024–2025",
+    years: "2023–2025",
   },
 ];
 
 export const service: ServiceEntry[] = [
   {
-    role: "Associate Editor",
-    organization: "Frontiers in Nutrition — Nutrition and Food Science Technology Section",
-    years: "2024–present",
-  },
-  {
-    role: "Reviewer",
+    role: "Hakem",
     organization:
-      "Food Chemistry, Food Research International, Nutrients, Journal of Functional Foods, LWT, The Journal of Nutrition",
-    years: "2019–present",
+      "Food Chemistry, Applied Food Research, Molecular Nutrition and Food Research, Future Foods ve ilgili dergiler",
+    years: "2020–günümüz",
   },
   {
-    role: "Scientific Committee Member",
-    organization: "Turkish Food Congress",
-    years: "2023–present",
-  },
-  {
-    role: "Faculty Mentor",
-    organization:
-      "Istanbul Medipol University — Women in STEM Mentorship Program",
-    years: "2022–present",
+    role: "Akademik Profil",
+    organization: "İTÜ Akademi · İTÜ Araştırma Portalı",
+    years: "2023–günümüz",
   },
 ];
 
 export const memberships: string[] = [
-  "Institute of Food Technologists (IFT)",
-  "International Union of Food Science and Technology (IUFoST)",
-  "American Society for Nutrition (ASN)",
-  "Turkish Food Engineers’ Association",
+  "İstanbul Teknik Üniversitesi Kimya Bölümü",
+  "ORCID: 0000-0002-9158-9732",
+  "Scopus Author ID: 57217383122",
 ];

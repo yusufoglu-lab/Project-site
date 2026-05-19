@@ -1,14 +1,129 @@
 export type MemberRole =
   | "Principal Investigator"
+  | "Lab & Product Supply Team"
+  | "AI Team"
   | "Postdoctoral Researcher"
   | "PhD Student"
   | "MS Student"
   | "Undergraduate Researcher"
   | "Visiting Scholar";
 
+export type TeamGroup = "pi" | "lab" | "ai";
+
+export interface TeamMemberRecord {
+  id: string;
+  name: string;
+  role: string;
+  roletr: string;
+  team: TeamGroup;
+  photo: string;
+  topic?: string;
+  isPI: boolean;
+  isAlumni: boolean;
+}
+
+/** Canonical team roster (source of truth). */
+export const teamMembersData: TeamMemberRecord[] = [
+  {
+    id: "pi-busra",
+    name: "Dr. Büşra Yusufoğlu",
+    role: "Principal Investigator",
+    roletr: "Araştırma Grubu Lideri",
+    team: "pi",
+    photo: "/images/busra-yusufoglu.webp",
+    topic:
+      "Gıda Kimyası, AGEs, Yapay Zeka Destekli Beslenme, Analitik Kimya",
+    isPI: true,
+    isAlumni: false,
+  },
+  {
+    id: "lab-yanki",
+    name: "Yankı Başaran",
+    role: "Lab & Product Supply Team",
+    roletr: "Lab ve Ürün Tedarik Ekibi",
+    team: "lab",
+    photo: "/images/team/yanki-basaran.png",
+    isPI: false,
+    isAlumni: false,
+  },
+  {
+    id: "lab-yigit",
+    name: "Yiğit Toraman",
+    role: "Lab & Product Supply Team",
+    roletr: "Lab ve Ürün Tedarik Ekibi",
+    team: "lab",
+    photo: "/images/team/yigit-toraman.png",
+    isPI: false,
+    isAlumni: false,
+  },
+  {
+    id: "lab-sukran",
+    name: "Şükran Kaya",
+    role: "Lab & Product Supply Team",
+    roletr: "Lab ve Ürün Tedarik Ekibi",
+    team: "lab",
+    photo: "/images/team/sukran-kaya.png",
+    isPI: false,
+    isAlumni: false,
+  },
+  {
+    id: "ai-gulbahar",
+    name: "Gülbahar Karakaş",
+    role: "AI Team",
+    roletr: "AI Ekibi",
+    team: "ai",
+    photo: "/images/team/gulbahar-karakas.png",
+    isPI: false,
+    isAlumni: false,
+  },
+  {
+    id: "ai-batuhan",
+    name: "Batuhan Karakuş",
+    role: "AI Team",
+    roletr: "AI Ekibi",
+    team: "ai",
+    photo: "/images/team/batuhan-karakus.png",
+    isPI: false,
+    isAlumni: false,
+  },
+  {
+    id: "ai-emir",
+    name: "Emir Sırmaoğlu",
+    role: "AI Team",
+    roletr: "AI Ekibi",
+    team: "ai",
+    photo: "/images/team/emir-sirmaoglu.png",
+    isPI: false,
+    isAlumni: false,
+  },
+  {
+    id: "ai-semih",
+    name: "Semih Eroğlu",
+    role: "AI Team",
+    roletr: "AI Ekibi",
+    team: "ai",
+    photo: "/images/team/semih-eroglu.png",
+    isPI: false,
+    isAlumni: false,
+  },
+  {
+    id: "ai-enes",
+    name: "Muhammet Enes Pamukçu",
+    role: "AI Team",
+    roletr: "AI Ekibi",
+    team: "ai",
+    photo: "/images/team/muhammet-enes-pamukcu.png",
+    isPI: false,
+    isAlumni: false,
+  },
+];
+
 export interface TeamMember {
+  id?: string;
   name: string;
   role: MemberRole;
+  roletr?: string;
+  team?: TeamGroup;
   degree?: string;
   topic: string;
   startYear: number;
@@ -20,133 +135,55 @@ export interface TeamMember {
   scholar?: string;
 }
 
-export const teamMembers: TeamMember[] = [
-  {
-    name: "Elif Kaya",
-    role: "PhD Student",
-    degree: "Ph.D. in Food Engineering",
-    topic:
-      "Polyphenol bioavailability and gut microbial transformation in Anatolian fruits",
-    startYear: 2023,
-    alumni: false,
-    photo: "/images/team/elif-kaya.jpg",
-    email: "elif.kaya@example.edu.tr",
-  },
-  {
-    name: "Mert Aslan",
-    role: "PhD Student",
-    degree: "Ph.D. in Nutrition Science",
-    topic:
-      "Reformulation of Turkish staples for improved postprandial glycemic response",
-    startYear: 2022,
-    alumni: false,
-    photo: "/images/team/mert-aslan.jpg",
-  },
-  {
-    name: "Furkan Şahin",
-    role: "PhD Student",
-    degree: "Ph.D. in Food Engineering",
-    topic:
-      "Metagenomics of artisanal kefir and tarhana starter cultures",
+function toLegacyMember(record: TeamMemberRecord): TeamMember {
+  const pageRole: MemberRole =
+    record.team === "lab"
+      ? "Undergraduate Researcher"
+      : record.team === "ai"
+        ? "PhD Student"
+        : (record.role as MemberRole);
+
+  return {
+    id: record.id,
+    name: record.name,
+    role: pageRole,
+    roletr: record.roletr,
+    team: record.team,
+    degree: record.roletr,
+    topic: record.topic ?? record.roletr,
     startYear: 2024,
-    alumni: false,
-    photo: "/images/team/furkan-sahin.jpg",
+    photo: record.photo,
+    alumni: record.isAlumni,
+    email: record.isPI ? "yusufoglu@itu.edu.tr" : undefined,
+  };
+}
+
+const piRecord = teamMembersData.find((m) => m.isPI)!;
+
+export const pi: TeamMember = toLegacyMember(piRecord);
+
+export const teamMembers: TeamMember[] = teamMembersData
+  .filter((m) => !m.isPI)
+  .map(toLegacyMember);
+
+/** Grouped sections for team page (use when page supports team-based layout). */
+export const teamSections = [
+  {
+    key: "pi" as const,
+    title: "Principal Investigator",
+    titleTr: "Araştırma Grubu Lideri",
+    members: teamMembersData.filter((m) => m.team === "pi"),
   },
   {
-    name: "Zeynep Demir",
-    role: "MS Student",
-    degree: "M.Sc. in Nutrition and Dietetics",
-    topic:
-      "Spray-drying encapsulation of rosehip phenolics in pectin–whey matrices",
-    startYear: 2024,
-    alumni: false,
-    photo: "/images/team/zeynep-demir.jpg",
+    key: "lab" as const,
+    title: "Lab & Product Supply Team",
+    titleTr: "Lab ve Ürün Tedarik Ekibi",
+    members: teamMembersData.filter((m) => m.team === "lab"),
   },
   {
-    name: "Ayşe Yıldız",
-    role: "MS Student",
-    degree: "M.Sc. in Food Engineering",
-    topic:
-      "Sensory–glycemic trade-offs in legume-enriched Turkish breads",
-    startYear: 2023,
-    alumni: false,
-    photo: "/images/team/ayse-yildiz.jpg",
-  },
-  {
-    name: "Selin Tekin",
-    role: "MS Student",
-    degree: "M.Sc. in Public Health Nutrition",
-    topic:
-      "Continuous glucose monitoring in free-living Turkish adults",
-    startYear: 2024,
-    alumni: false,
-    photo: "/images/team/selin-tekin.jpg",
-  },
-  {
-    name: "Can Polat",
-    role: "Undergraduate Researcher",
-    degree: "B.Sc. in Nutrition and Dietetics",
-    topic:
-      "Analytical method development for ellagitannin metabolites",
-    startYear: 2024,
-    alumni: false,
-    photo: "/images/team/can-polat.jpg",
-  },
-  {
-    name: "Naz Öztürk",
-    role: "Undergraduate Researcher",
-    degree: "B.Sc. in Food Engineering",
-    topic:
-      "Texture and acceptance of extruded chickpea–lentil school snacks",
-    startYear: 2024,
-    alumni: false,
-    photo: "/images/team/naz-ozturk.jpg",
-  },
-  // Alumni
-  {
-    name: "Dr. Kerim Bostan",
-    role: "Postdoctoral Researcher",
-    degree: "Ph.D. in Food Engineering",
-    topic: "Thermal processing of anthocyanin-rich vegetables",
-    startYear: 2020,
-    endYear: 2022,
-    alumni: true,
-    currentPosition:
-      "Senior R&D Scientist, Ülker Bisküvi (Istanbul, Türkiye)",
-    photo: "/images/team/kerim-bostan.jpg",
-  },
-  {
-    name: "Dr. Ece Aydın",
-    role: "PhD Student",
-    degree: "Ph.D. in Food Engineering",
-    topic: "Phenolic profile of Turkish wheat landraces",
-    startYear: 2018,
-    endYear: 2023,
-    alumni: true,
-    currentPosition:
-      "Assistant Professor, Bursa Uludağ University (Türkiye)",
-    photo: "/images/team/ece-aydin.jpg",
-  },
-  {
-    name: "Burak Çelik",
-    role: "MS Student",
-    degree: "M.Sc. in Food Engineering",
-    topic: "Antioxidant retention in dried Anatolian fruit snacks",
-    startYear: 2021,
-    endYear: 2023,
-    alumni: true,
-    currentPosition:
-      "Product Development Engineer, Eti Gıda (Eskişehir, Türkiye)",
+    key: "ai" as const,
+    title: "AI Team",
+    titleTr: "AI Ekibi",
+    members: teamMembersData.filter((m) => m.team === "ai"),
   },
 ];
-
-export const pi: TeamMember = {
-  name: "Dr. Büşra Yusufoğlu",
-  role: "Principal Investigator",
-  degree: "Ph.D. in Food Engineering",
-  topic: "Functional foods, bioactive compounds, and gut–metabolic health",
-  startYear: 2020,
-  alumni: false,
-  photo: "/images/profile.jpg",
-  email: "busra.yusufoglu@example.edu.tr",
-};
