@@ -45,14 +45,14 @@ export async function generateMetadata({
   return {
     metadataBase: new URL(siteUrl),
     title: {
-      default: `${profile.name} — ${profile.title}`,
+      default: t("siteName"),
       template: `%s · ${t("siteName")}`,
     },
     description: profile.shortBio,
     openGraph: {
       type: "website",
       locale: locale === "tr" ? "tr_TR" : locale === "de" ? "de_DE" : "en_US",
-      title: `${profile.name} — ${profile.title}`,
+      title: `${t("siteName")} — ${profile.name}`,
       description: profile.shortBio,
       siteName: t("siteName"),
     },

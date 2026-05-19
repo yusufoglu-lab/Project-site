@@ -1,7 +1,7 @@
 {
   "meta": {
-    "siteName": "Büşra Yusufoğlu",
-    "labName": "Yusufoğlu Research Group"
+    "siteName": "BioNutriMet AI Lab",
+    "labName": "BioNutriMet AI Lab"
   },
   "lang": {
     "label": "Language",
@@ -47,7 +47,13 @@
     "news_title": "News & Announcements",
     "news_all": "All news",
     "present": "present",
-    "explore_project": "Explore project"
+    "explore_project": "Explore project",
+    "lab_name": "BioNutriMet AI Lab",
+    "lab_tagline": "Nutritional Biochemistry & Metabolic Pathways",
+    "lab_description": "An ITU-based interdisciplinary research group conducting cutting-edge research in advanced glycation end products, metabolic biochemistry, and AI-driven nutritional science.",
+    "cta_explore": "Explore Research →",
+    "cta_team": "Meet the Team →",
+    "google_scholar_profile": "Google Scholar Profile →"
   },
   "about": {
     "eyebrow": "About",
@@ -60,7 +66,10 @@
     "experience_title": "Experience",
     "awards_eyebrow": "Recognition",
     "awards_title": "Awards & honors",
-    "degree_in": "{degree} in {field}"
+    "degree_in": "{degree} in {field}",
+    "download_cv": "Download CV (PDF)",
+    "itu_profile": "ITU Academic Profile →",
+    "academic_profiles": "Academic Profiles"
   },
   "research": {
     "eyebrow": "Research",
@@ -135,6 +144,7 @@
     "undergradSection": "Lab & Product Supply Team",
     "mastersSection": "AI Team",
     "ai_section": "AI Team",
+    "academic_section": "Collaborating Academics",
     "alumni_section": "Alumni",
     "alumni_eyebrow": "Where they are now",
     "alumniEyebrow": "Where they are now",
@@ -226,7 +236,7 @@
     "connect": "Connect",
     "email": "Email",
     "rights": "All rights reserved.",
-    "built_with": "ITU Department of Chemistry"
+    "built_with": "BioNutriMet AI Lab"
   },
   "common": {
     "view_all": "View all",

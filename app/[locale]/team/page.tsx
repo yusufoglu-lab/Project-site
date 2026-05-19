@@ -26,6 +26,9 @@ export default async function TeamPage() {
 
   const alumni = teamMembers.filter((m) => m.alumni);
 
+  const academicMembers = teamMembersData
+    .filter((m) => m.team === "academic")
+    .map(toLegacyMember);
   const labMembers = teamMembersData
     .filter((m) => m.team === "lab")
     .map(toLegacyMember);
@@ -34,6 +37,10 @@ export default async function TeamPage() {
     .map(toLegacyMember);
 
   const memberSections = [
+    {
+      title: t("academic_section"),
+      members: academicMembers,
+    },
     {
       title: t("undergradSection"),
       members: labMembers,

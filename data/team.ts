@@ -2,13 +2,14 @@ export type MemberRole =
   | "Principal Investigator"
   | "Lab & Product Supply Team"
   | "AI Team"
+  | "Collaborating Academic"
   | "Postdoctoral Researcher"
   | "PhD Student"
   | "MS Student"
   | "Undergraduate Researcher"
   | "Visiting Scholar";
 
-export type TeamGroup = "pi" | "lab" | "ai";
+export type TeamGroup = "pi" | "lab" | "ai" | "academic";
 
 export interface TeamMemberRecord {
   id: string;
@@ -18,6 +19,7 @@ export interface TeamMemberRecord {
   team: TeamGroup;
   photo: string;
   topic?: string;
+  institution?: string;
   isPI: boolean;
   isAlumni: boolean;
 }
@@ -34,6 +36,50 @@ export const teamMembersData: TeamMemberRecord[] = [
     topic:
       "Gıda Kimyası, AGEs, Yapay Zeka Destekli Beslenme, Analitik Kimya",
     isPI: true,
+    isAlumni: false,
+  },
+  {
+    id: "academic-tuba",
+    name: "Prof. Dr. Tuba Esatbeyoğlu",
+    role: "Collaborating Academic",
+    roletr: "İşbirlikçi Akademisyen",
+    team: "academic",
+    institution: "Leibniz University Hannover",
+    photo: "/images/team/tuba-esatbeyoglu.jpg",
+    isPI: false,
+    isAlumni: false,
+  },
+  {
+    id: "academic-emine",
+    name: "Dr. Öğr. Üyesi Emine Kazanç",
+    role: "Collaborating Academic",
+    roletr: "İşbirlikçi Akademisyen",
+    team: "academic",
+    institution: "Boğaziçi Üniversitesi",
+    photo: "/images/team/emine-kazanc.jpg",
+    isPI: false,
+    isAlumni: false,
+  },
+  {
+    id: "academic-omer",
+    name: "Dr. Öğr. Üyesi Ömer Faruk Tutar",
+    role: "Collaborating Academic",
+    roletr: "İşbirlikçi Akademisyen",
+    team: "academic",
+    institution: "İstinye Üniversitesi",
+    photo: "/images/team/omer-faruk-tutar.jpg",
+    isPI: false,
+    isAlumni: false,
+  },
+  {
+    id: "academic-hakan",
+    name: "Araş. Gör. Muhammed Hakan Yorulmuş",
+    role: "Collaborating Academic",
+    roletr: "İşbirlikçi Akademisyen",
+    team: "academic",
+    institution: "İstanbul Teknik Üniversitesi",
+    photo: "/images/team/hakan-yorulmus.jpg",
+    isPI: false,
     isAlumni: false,
   },
   {
@@ -126,6 +172,7 @@ export interface TeamMember {
   team?: TeamGroup;
   degree?: string;
   topic: string;
+  institution?: string;
   startYear: number;
   endYear?: number;
   photo?: string;
@@ -141,7 +188,9 @@ export function toLegacyMember(record: TeamMemberRecord): TeamMember {
       ? "Undergraduate Researcher"
       : record.team === "ai"
         ? "MS Student"
-        : (record.role as MemberRole);
+        : record.team === "academic"
+          ? "Collaborating Academic"
+          : (record.role as MemberRole);
 
   return {
     id: record.id,
@@ -150,7 +199,8 @@ export function toLegacyMember(record: TeamMemberRecord): TeamMember {
     roletr: record.roletr,
     team: record.team,
     degree: record.roletr,
-    topic: record.topic ?? record.roletr,
+    topic: record.topic ?? record.institution ?? record.roletr,
+    institution: record.institution,
     startYear: 2024,
     photo: record.photo,
     alumni: record.isAlumni,
@@ -163,7 +213,7 @@ const piRecord = teamMembersData.find((m) => m.isPI)!;
 export const pi: TeamMember = toLegacyMember(piRecord);
 
 export const teamMembers: TeamMember[] = teamMembersData
-  .filter((m) => !m.isPI)
+  .filter((m) => !m.isPI && m.team !== "academic")
   .map(toLegacyMember);
 
 /** Grouped sections for team page (use when page supports team-based layout). */
@@ -173,6 +223,12 @@ export const teamSections = [
     title: "Principal Investigator",
     titleTr: "Araştırma Grubu Lideri",
     members: teamMembersData.filter((m) => m.team === "pi"),
+  },
+  {
+    key: "academic" as const,
+    title: "Collaborating Academics",
+    titleTr: "İşbirlikçi Akademisyenler",
+    members: teamMembersData.filter((m) => m.team === "academic"),
   },
   {
     key: "lab" as const,

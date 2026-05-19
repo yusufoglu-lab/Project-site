@@ -51,10 +51,15 @@ export function TeamMemberCard({ member, badgeLabel }: TeamMemberCardProps) {
             </span>
           </div>
         )}
-        <div className="absolute left-3 top-3 z-10">
+        <div className="absolute left-3 top-3 z-10 max-w-[calc(100%-1.5rem)]">
           <Badge variant="secondary">
             {badgeLabel ?? member.roletr ?? member.role}
           </Badge>
+          {member.institution && (
+            <p className="mt-2 rounded-md bg-paper/90 px-2 py-1 text-[11px] leading-snug text-ink/75 backdrop-blur-sm">
+              {member.institution}
+            </p>
+          )}
         </div>
       </div>
       <div className="flex flex-1 flex-col p-5">
@@ -66,25 +71,31 @@ export function TeamMemberCard({ member, badgeLabel }: TeamMemberCardProps) {
             {member.degree}
           </p>
         )}
-        <p className="mt-3 text-sm leading-relaxed text-ink/70">
-          {member.topic}
-        </p>
-        <div className="mt-auto flex items-center justify-between border-t border-ink/8 pt-3 text-xs text-ink/55">
-          <span>
-            {member.alumni
-              ? `${member.startYear} – ${member.endYear ?? ""}`
-              : t("joined", { year: member.startYear })}
-          </span>
-          {member.email && (
-            <a
-              href={`mailto:${member.email}`}
-              className="inline-flex items-center gap-1 text-ink/60 hover:text-teal-dark"
-              aria-label={`Email ${member.name}`}
-            >
-              <Mail className="h-3.5 w-3.5" />
-            </a>
+        {member.topic &&
+          member.team !== "academic" &&
+          member.topic !== member.institution && (
+            <p className="mt-3 text-sm leading-relaxed text-ink/70">
+              {member.topic}
+            </p>
           )}
-        </div>
+        {member.team !== "academic" && (
+          <div className="mt-auto flex items-center justify-between border-t border-ink/8 pt-3 text-xs text-ink/55">
+            <span>
+              {member.alumni
+                ? `${member.startYear} – ${member.endYear ?? ""}`
+                : t("joined", { year: member.startYear })}
+            </span>
+            {member.email && (
+              <a
+                href={`mailto:${member.email}`}
+                className="inline-flex items-center gap-1 text-ink/60 hover:text-teal-dark"
+                aria-label={`Email ${member.name}`}
+              >
+                <Mail className="h-3.5 w-3.5" />
+              </a>
+            )}
+          </div>
+        )}
         {member.alumni && member.currentPosition && (
           <p className="mt-3 text-xs italic text-ink/60">
             {t("now")}: {member.currentPosition}

@@ -56,7 +56,7 @@ export async function Footer() {
                   {profile.shortName}
                 </p>
                 <p className="text-xs uppercase tracking-[0.18em] text-ink/55">
-                  {profile.title}
+                  {t("built_with")}
                 </p>
               </div>
             </div>

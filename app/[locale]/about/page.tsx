@@ -1,26 +1,46 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Award, Briefcase, GraduationCap } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { Award, Briefcase, Download, ExternalLink, GraduationCap } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/section-header";
 import { FadeIn } from "@/components/fade-in";
 import { TagPill } from "@/components/tag-pill";
+import { StatCard } from "@/components/stat-card";
 import { profile } from "@/data/profile";
 import { education, positions, awards } from "@/data/cv";
-import { translateResearchArea } from "@/lib/i18n-labels";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("about");
   return {
     title: t("eyebrow"),
-    description: t("bio"),
+    description: profile.bio,
   };
 }
 
+const academicLinks = [
+  { href: profile.links.googleScholar, label: "Google Scholar" },
+  { href: profile.links.orcid, label: "ORCID" },
+  { href: profile.links.scopus, label: "Scopus" },
+  { href: profile.links.webOfScience, label: "Web of Science" },
+  { href: profile.links.researchGate, label: "ResearchGate" },
+  { href: profile.links.linkedin, label: "LinkedIn" },
+] as const;
+
 export default async function AboutPage() {
   const t = await getTranslations("about");
-  const tResearch = await getTranslations("research");
+  const tHome = await getTranslations("home");
   const tCv = await getTranslations("cv");
+
+  const statLabels = [
+    tHome("stats_publications"),
+    tHome("stats_citations"),
+    tHome("stats_hindex"),
+    tHome("stats_projects"),
+  ] as const;
+
+  const interestTags = profile.researchAreas.flatMap((area) => area.tags);
 
   return (
     <>
@@ -29,67 +49,102 @@ export default async function AboutPage() {
           <p className="text-xs font-medium uppercase tracking-[0.18em] text-teal-dark">
             {t("eyebrow")}
           </p>
-          <h1 className="mt-3 font-serif text-4xl tracking-tight text-ink sm:text-5xl md:text-6xl">
-            {t("title")}
-          </h1>
         </FadeIn>
       </section>
 
-      <section className="container mx-auto grid gap-12 py-16 lg:grid-cols-[1fr_1.4fr] lg:gap-16 lg:py-24">
-        <FadeIn>
-          <div className="sticky top-24">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-ink/10 bg-ink/5 shadow-lg">
-              <Image
-                src={profile.photo}
-                alt={profile.name}
-                fill
-                className="object-cover object-top"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                priority
-              />
+      <section className="container mx-auto pb-16 lg:pb-24">
+        <div className="grid gap-12 lg:grid-cols-[minmax(240px,280px)_1fr] lg:gap-16">
+          <FadeIn>
+            <div className="lg:sticky lg:top-24">
+              <div className="relative mx-auto aspect-[3/4] w-full max-w-[280px] overflow-hidden rounded-2xl shadow-lg ring-1 ring-ink/10 lg:mx-0">
+                <Image
+                  src={profile.photo}
+                  alt={profile.name}
+                  fill
+                  priority
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 280px, 280px"
+                />
+              </div>
+              <div className="mx-auto mt-5 flex max-w-[280px] flex-col gap-2 lg:mx-0">
+                <Button asChild variant="outline" className="w-full justify-center">
+                  <Link href="/files/cv.pdf" target="_blank">
+                    <Download className="h-4 w-4" />
+                    {t("download_cv")}
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full justify-center">
+                  <a
+                    href={profile.links.ituAkademi}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t("itu_profile")}
+                    <ExternalLink className="h-3.5 w-3.5 opacity-60" />
+                  </a>
+                </Button>
+              </div>
             </div>
-            <div className="mt-6 space-y-2 text-sm text-ink/70">
-              <p className="font-serif text-lg text-ink">{profile.name}</p>
-              <p>{profile.title}</p>
-              <p>{profile.department}</p>
-              <p>{profile.institution}</p>
-            </div>
-          </div>
-        </FadeIn>
+          </FadeIn>
 
-        <FadeIn delay={120}>
-          <div className="space-y-6 text-base leading-relaxed text-ink/80 sm:text-lg">
-            {t("bio")
-              .split(/\n\n+/)
-              .map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-          </div>
+          <FadeIn delay={120}>
+            <h1 className="font-serif text-3xl tracking-tight text-ink sm:text-[2.5rem] sm:leading-tight">
+              {profile.name}
+            </h1>
+            <p className="mt-2 text-lg font-medium text-teal-dark">
+              {profile.title}
+            </p>
+            <p className="mt-1 text-base text-ink/60">
+              {profile.department}, {profile.institution}
+            </p>
 
-          <div className="mt-14">
-            <h2 className="font-serif text-2xl tracking-tight text-ink sm:text-3xl">
-              {t("interests")}
-            </h2>
-            <div className="mt-6 space-y-6">
-              {profile.researchAreas.map((area) => (
-                <div key={area.name}>
-                  <p className="text-xs font-medium uppercase tracking-[0.18em] text-ink/55">
-                    {translateResearchArea(area.name, (key) =>
-                      tResearch(key)
-                    )}
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {area.tags.map((tag) => (
-                      <TagPill key={tag} tone="teal">
-                        {tag}
-                      </TagPill>
-                    ))}
-                  </div>
-                </div>
+            <hr className="my-8 border-ink/10" />
+
+            <p className="text-base leading-relaxed text-ink/80 sm:text-lg">
+              {profile.bio}
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-2">
+              {interestTags.map((tag) => (
+                <TagPill key={tag} tone="teal">
+                  {tag}
+                </TagPill>
               ))}
             </div>
-          </div>
-        </FadeIn>
+
+            <hr className="my-8 border-ink/10" />
+
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {profile.stats.map((s, i) => (
+                <StatCard
+                  key={s.label}
+                  value={s.value}
+                  label={statLabels[i]}
+                  suffix={s.suffix}
+                  compact
+                  delay={i * 80}
+                />
+              ))}
+            </div>
+
+            <p className="mt-8 text-xs font-medium uppercase tracking-[0.16em] text-ink/55">
+              {t("academic_profiles")}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {academicLinks.map(({ href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full border border-ink/10 bg-white px-3.5 py-1.5 text-xs text-ink/80 transition-colors hover:border-teal/40 hover:bg-teal/5 hover:text-teal-dark"
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
       </section>
 
       <section className="border-t border-ink/8 bg-white">

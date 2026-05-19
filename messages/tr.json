@@ -1,7 +1,7 @@
 {
   "meta": {
-    "siteName": "Büşra Yusufoğlu",
-    "labName": "Yusufoğlu Araştırma Grubu"
+    "siteName": "BioNutriMet AI Lab",
+    "labName": "BioNutriMet AI Lab"
   },
   "lang": {
     "label": "Dil",
@@ -47,7 +47,13 @@
     "news_title": "Haberler ve Duyurular",
     "news_all": "Tüm haberler",
     "present": "günümüz",
-    "explore_project": "Projeyi keşfet"
+    "explore_project": "Projeyi keşfet",
+    "lab_name": "BioNutriMet AI Lab",
+    "lab_tagline": "Nutritional Biochemistry & Metabolic Pathways",
+    "lab_description": "İleri glikasyon son ürünleri, metabolik biyokimya ve yapay zeka destekli beslenme bilimi alanlarında disiplinler arası araştırmalar yürüten İTÜ merkezli bir araştırma grubu.",
+    "cta_explore": "Araştırmaları Keşfet →",
+    "cta_team": "Ekibi Tanı →",
+    "google_scholar_profile": "Google Scholar Profili →"
   },
   "about": {
     "eyebrow": "Hakkında",
@@ -60,7 +66,10 @@
     "experience_title": "Deneyim",
     "awards_eyebrow": "Tanınma",
     "awards_title": "Ödüller ve başarılar",
-    "degree_in": "{degree} — {field}"
+    "degree_in": "{degree} — {field}",
+    "download_cv": "Özgeçmişi İndir (PDF)",
+    "itu_profile": "İTÜ Akademi Profili →",
+    "academic_profiles": "Akademik Profiller"
   },
   "research": {
     "eyebrow": "Araştırma",
@@ -135,6 +144,7 @@
     "undergradSection": "Lab ve Ürün Tedarik Ekibi",
     "mastersSection": "AI Ekibi",
     "ai_section": "AI Ekibi",
+    "academic_section": "İşbirlikçi Akademisyenler",
     "alumni_section": "Mezunlar",
     "alumni_eyebrow": "Neredeler",
     "alumniEyebrow": "Neredeler",
@@ -226,7 +236,7 @@
     "connect": "Bağlantılar",
     "email": "E-posta",
     "rights": "Tüm hakları saklıdır.",
-    "built_with": "İTÜ Kimya Bölümü"
+    "built_with": "BioNutriMet AI Lab"
   },
   "common": {
     "view_all": "Tümünü gör",

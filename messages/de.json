@@ -1,7 +1,7 @@
 {
   "meta": {
-    "siteName": "Büşra Yusufoğlu",
-    "labName": "Yusufoğlu Forschungsgruppe"
+    "siteName": "BioNutriMet AI Lab",
+    "labName": "BioNutriMet AI Lab"
   },
   "lang": {
     "label": "Sprache",
@@ -47,7 +47,13 @@
     "news_title": "Neuigkeiten & Ankündigungen",
     "news_all": "Alle Neuigkeiten",
     "present": "heute",
-    "explore_project": "Projekt ansehen"
+    "explore_project": "Projekt ansehen",
+    "lab_name": "BioNutriMet AI Lab",
+    "lab_tagline": "Nutritional Biochemistry & Metabolic Pathways",
+    "lab_description": "Eine ITU-basierte interdisziplinäre Forschungsgruppe, die Spitzenforschung zu fortgeschrittenen Glykierungsendprodukten, metabolischer Biochemie und KI-gestützter Ernährungswissenschaft betreibt.",
+    "cta_explore": "Forschung entdecken →",
+    "cta_team": "Das Team kennenlernen →",
+    "google_scholar_profile": "Google Scholar Profil →"
   },
   "about": {
     "eyebrow": "Über mich",
@@ -60,7 +66,10 @@
     "experience_title": "Erfahrung",
     "awards_eyebrow": "Anerkennung",
     "awards_title": "Auszeichnungen & Ehrungen",
-    "degree_in": "{degree} in {field}"
+    "degree_in": "{degree} in {field}",
+    "download_cv": "Lebenslauf herunterladen (PDF)",
+    "itu_profile": "ITÜ Akademisches Profil →",
+    "academic_profiles": "Akademische Profile"
   },
   "research": {
     "eyebrow": "Forschung",
@@ -135,6 +144,7 @@
     "undergradSection": "Labor & Produktversorgungsteam",
     "mastersSection": "KI-Team",
     "ai_section": "KI-Team",
+    "academic_section": "Kooperierende Akademiker",
     "alumni_section": "Ehemalige",
     "alumni_eyebrow": "Wo sie jetzt sind",
     "alumniEyebrow": "Wo sie jetzt sind",
@@ -226,7 +236,7 @@
     "connect": "Kontakt",
     "email": "E-Mail",
     "rights": "Alle Rechte vorbehalten.",
-    "built_with": "ITÜ Fachbereich Chemie"
+    "built_with": "BioNutriMet AI Lab"
   },
   "common": {
     "view_all": "Alle anzeigen",

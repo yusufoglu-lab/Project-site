@@ -7,9 +7,16 @@ interface StatCardProps {
   label: string;
   suffix?: string;
   delay?: number;
+  compact?: boolean;
 }
 
-export function StatCard({ value, label, suffix, delay = 0 }: StatCardProps) {
+export function StatCard({
+  value,
+  label,
+  suffix,
+  delay = 0,
+  compact = false,
+}: StatCardProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
@@ -52,16 +59,33 @@ export function StatCard({ value, label, suffix, delay = 0 }: StatCardProps) {
   return (
     <div
       ref={ref}
-      className="group relative overflow-hidden rounded-2xl border border-ink/10 bg-white p-7 transition-colors hover:border-teal/40"
+      className={
+        compact
+          ? "group relative overflow-hidden rounded-xl border border-ink/10 bg-white p-4 transition-colors hover:border-teal/40"
+          : "group relative overflow-hidden rounded-2xl border border-ink/10 bg-white p-7 transition-colors hover:border-teal/40"
+      }
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-      <div className="font-serif text-5xl font-medium tracking-tight text-ink tabular-nums sm:text-6xl">
+      <div
+        className={
+          compact
+            ? "font-serif text-2xl font-medium tracking-tight text-ink tabular-nums sm:text-3xl"
+            : "font-serif text-5xl font-medium tracking-tight text-ink tabular-nums sm:text-6xl"
+        }
+      >
         {count}
         {suffix ?? ""}
       </div>
-      <div className="mt-3 text-sm uppercase tracking-[0.16em] text-ink/55">
+      <div
+        className={
+          compact
+            ? "mt-1.5 text-[10px] uppercase tracking-[0.14em] text-ink/55"
+            : "mt-3 text-sm uppercase tracking-[0.16em] text-ink/55"
+        }
+      >
         {label}
       </div>
     </div>
   );
 }
+

@@ -1,10 +1,8 @@
-import Image from "next/image";
-
 import { getTranslations } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
 
-import { ArrowUpRight, Download, FlaskConical, Sparkles } from "lucide-react";
+import { ArrowUpRight, BookOpen, FlaskConical } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -84,98 +82,26 @@ export default async function HomePage() {
 
         />
 
-        <div className="container relative mx-auto grid gap-12 pb-20 pt-16 sm:gap-14 sm:pt-20 lg:grid-cols-[minmax(240px,280px)_1fr] lg:items-center lg:gap-16 lg:pb-32 lg:pt-28">
-
-          <FadeIn className="order-1 mx-auto w-full max-w-[280px] lg:order-1 lg:mx-0">
-
-            <div className="relative mx-auto aspect-[3/4] w-full max-w-[280px] overflow-hidden rounded-2xl border-4 border-white shadow-lg ring-1 ring-ink/10">
-
-              <Image
-
-                src={profile.photo}
-
-                alt={profile.name}
-
-                fill
-
-                priority
-
-                className="object-cover object-top"
-
-                sizes="(max-width: 1024px) 240px, 280px"
-
-              />
-
-            </div>
-
-          </FadeIn>
-
-
-
-          <FadeIn delay={120} className="order-2 lg:order-2">
-
-            <p className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-ink/70">
-
-              <Sparkles className="h-3.5 w-3.5 text-teal-dark" />
-
-              {t("badge")}
-
-            </p>
-
-            <h1 className="mt-6 font-serif text-4xl text-ink hero-heading sm:text-5xl md:text-6xl lg:text-7xl">
-
-              {t("title")}
-
+        <div className="container relative mx-auto px-4 py-16 text-center sm:py-20 lg:py-28">
+          <FadeIn>
+            <h1 className="font-serif text-4xl font-semibold tracking-tight text-ink sm:text-5xl lg:text-[4.5rem] lg:leading-[1.05]">
+              {t("lab_name")}
             </h1>
-
-            <p className="mt-5 max-w-xl text-lg text-ink/70 sm:text-xl">
-
-              {t("subtitle")}
-
+            <p className="mt-4 text-[1.1rem] tracking-[0.12em] text-teal-dark">
+              {t("lab_tagline")}
             </p>
-
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink/70 sm:text-lg">
-
-              {t("bio")}
-
+            <p className="mx-auto mt-6 max-w-[650px] text-base leading-relaxed text-ink/65 sm:text-lg">
+              {t("lab_description")}
             </p>
-
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Button asChild size="lg">
-
-                <Link href="/research">
-
-                  {t("cta_research")}
-
-                  <ArrowUpRight className="h-4 w-4" />
-
-                </Link>
-
+                <Link href="/research">{t("cta_explore")}</Link>
               </Button>
-
               <Button asChild size="lg" variant="outline">
-
-                <Link href="/cv">
-
-                  <Download className="h-4 w-4" />
-
-                  {t("cta_cv")}
-
-                </Link>
-
+                <Link href="/team">{t("cta_team")}</Link>
               </Button>
-
             </div>
-
-            <p className="mt-6 text-xs uppercase tracking-[0.16em] text-ink/50">
-
-              {t("project_badge")}
-
-            </p>
-
           </FadeIn>
-
         </div>
 
       </section>
@@ -206,6 +132,19 @@ export default async function HomePage() {
 
           ))}
 
+        </div>
+
+        <div className="container mx-auto flex justify-center px-4 pb-12 pt-2 sm:pb-16">
+          <Button asChild variant="outline" size="sm">
+            <a
+              href={profile.scholar}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BookOpen className="h-4 w-4" />
+              {t("google_scholar_profile")}
+            </a>
+          </Button>
         </div>
 
       </section>
