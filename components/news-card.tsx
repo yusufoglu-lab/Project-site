@@ -3,7 +3,7 @@
 import { Link } from "@/i18n/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { formatDate } from "@/lib/utils";
 import { translateNewsCategory } from "@/lib/i18n-labels";
 import type { NewsItem } from "@/data/news";
@@ -26,6 +26,7 @@ const categoryVariant: Record<
 };
 
 export function NewsCard({ item, compact = false }: NewsCardProps) {
+  const locale = useLocale();
   const t = useTranslations("news");
   const tCommon = useTranslations("common");
 
@@ -40,7 +41,7 @@ export function NewsCard({ item, compact = false }: NewsCardProps) {
             dateTime={item.date}
             className="block font-mono text-xs uppercase tracking-[0.14em] text-ink/55"
           >
-            {formatDate(item.date)}
+            {formatDate(item.date, locale)}
           </time>
           <div className="mt-2">
             <Badge variant={categoryVariant[item.category]}>

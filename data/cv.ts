@@ -86,16 +86,11 @@ export const positions: PositionEntry[] = positionsRaw.map((p) => {
 
 export const awards: AwardEntry[] = [
   {
-    title: "Misafir Araştırmacı",
-    organization: "Leibniz University Hannover",
-    year: 2024,
-    detail: "Uluslararası araştırma ziyareti.",
-  },
-  {
-    title: "Araştırmacı",
-    organization: "University of Connecticut",
-    year: 2021,
-    detail: "Uluslararası araştırma deneyimi.",
+    title: "TÜBİTAK 3501 Kariyer Geliştirme Programı",
+    organization: "TÜBİTAK",
+    year: 2025,
+    detail:
+      "Yapay zeka destekli gıda kimyası projesi TÜBİTAK 3501 kapsamında desteklendi.",
   },
 ];
 

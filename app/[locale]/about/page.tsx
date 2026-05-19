@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Award, GraduationCap } from "lucide-react";
+import { Award, Briefcase, GraduationCap } from "lucide-react";
 import { SectionHeader } from "@/components/section-header";
 import { FadeIn } from "@/components/fade-in";
 import { TagPill } from "@/components/tag-pill";
 import { profile } from "@/data/profile";
-import { education, awards } from "@/data/cv";
+import { education, positions, awards } from "@/data/cv";
 import { translateResearchArea } from "@/lib/i18n-labels";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -20,6 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AboutPage() {
   const t = await getTranslations("about");
   const tResearch = await getTranslations("research");
+  const tCv = await getTranslations("cv");
 
   return (
     <>
@@ -128,6 +129,43 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      <section className="border-t border-ink/8 bg-white">
+        <div className="container mx-auto py-20 sm:py-24">
+          <SectionHeader
+            eyebrow={t("experience_eyebrow")}
+            title={t("experience_title")}
+          />
+          <ol className="mt-10 space-y-8 border-l border-ink/10 pl-8">
+            {positions.map((p, i) => (
+              <FadeIn key={`${p.title}-${p.startYear}`} delay={i * 80}>
+                <li className="relative">
+                  <span
+                    aria-hidden
+                    className="absolute -left-[42px] top-1 grid h-9 w-9 place-items-center rounded-full border border-ink/15 bg-paper text-ink"
+                  >
+                    <Briefcase className="h-4 w-4 text-teal-dark" />
+                  </span>
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink/55">
+                    {p.startYear}–{p.endYear ?? tCv("present")}
+                  </p>
+                  <h3 className="mt-1 font-serif text-xl text-ink sm:text-2xl">
+                    {p.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-ink/75">
+                    {p.institution} · {p.location}
+                  </p>
+                  {p.detail && (
+                    <p className="mt-2 text-sm leading-relaxed text-ink/65">
+                      {p.detail}
+                    </p>
+                  )}
+                </li>
+              </FadeIn>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <section className="container mx-auto py-20 sm:py-28">
         <SectionHeader
           eyebrow={t("awards_eyebrow")}
@@ -148,6 +186,11 @@ export default async function AboutPage() {
                     {a.title}
                   </p>
                   <p className="mt-1 text-sm text-ink/70">{a.organization}</p>
+                  {a.detail && (
+                    <p className="mt-1 text-sm leading-relaxed text-ink/65">
+                      {a.detail}
+                    </p>
+                  )}
                   <p className="mt-1 text-xs uppercase tracking-[0.14em] text-ink/55">
                     {a.year}
                   </p>

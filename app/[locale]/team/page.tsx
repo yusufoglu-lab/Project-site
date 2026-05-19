@@ -82,9 +82,11 @@ export default async function TeamPage() {
               <p className="mt-1 text-sm uppercase tracking-[0.14em] text-ink/55">
                 {profile.title} · {profile.department}
               </p>
-              <p className="mt-5 text-base leading-relaxed text-ink/75">
-                {t("piBio")}
-              </p>
+              <div className="mt-5 space-y-4 text-base leading-relaxed text-ink/75">
+                {profile.bio.split(/\n\n+/).map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
+              </div>
               <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-ink/70">
                 <span className="inline-flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-teal-dark" />

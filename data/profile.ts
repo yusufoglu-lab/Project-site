@@ -20,7 +20,7 @@ export const profile = {
   mission:
     "Paketli ve işlenmiş gıdalardaki ileri glikasyon son ürünlerini (AGEs) kimyasal analiz ve yapay zeka algoritmalarıyla tespit ederek gıda güvenliği ve fonksiyonel gıda araştırmalarına katkı sağlıyoruz.",
   scholar:
-    "https://scholar.google.com.tr/citations?user=Büşra",
+    "https://scholar.google.com/citations?user=ike42VcAAAAJ&hl=tr",
   orcid: "https://orcid.org/0000-0002-9158-9732",
   researchGate: "https://www.researchgate.net/profile/Busra-Yusufoglu",
   linkedin: "https://www.linkedin.com/in/büşra-yusufoğlu-01294831a/",
@@ -56,7 +56,7 @@ export const profile = {
   ],
   links: {
     googleScholar:
-      "https://scholar.google.com.tr/citations?user=Büşra",
+      "https://scholar.google.com/citations?user=ike42VcAAAAJ&hl=tr",
     orcid: "https://orcid.org/0000-0002-9158-9732",
     scopus:
       "https://www.scopus.com/authid/detail.uri?authorId=57217383122",
